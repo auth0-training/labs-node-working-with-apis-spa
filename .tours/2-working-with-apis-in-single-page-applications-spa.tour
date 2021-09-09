@@ -1,0 +1,71 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "2: Working with APIs in Single Page Applications (SPA)",
+  "steps": [
+    {
+      "file": "src/spa-app/app.js",
+      "line": 1,
+      "title": "What you'll do",
+      "description": "**Here's what you'll do:**  \n\nIn this lab, you will learn how to make your Single-Page Application (SPA) consume, on behalf of the user, the private endpoint exposed by an API.\n\nThe SPA in question is a vanilla JavaScript application that consumes the Expenses API.\n\nIn this exercise, you will focus on updating the SPA to request access to the API and secure the request to the private Expenses API endpoint.\n"
+    },
+    {
+      "file": "src/spa-app/app.js",
+      "line": 1,
+      "title": "Launch the Web App and API",
+      "description": "## Launch the Web App and API\nAlright! You've registered the Lab: API in your Auth0 Labs tenant. We've also taken the liberty of automatically registering the Single Page Application (Lab: SPA) that this lab uses. \n\nWe've also pre-configured your Callback and Logout URLs with the URL of your application -- something that you'll need to know how to do. Let's deploy your application and API now, and in the next step we'll show you how to set those values in the Auth0 dashboard.\n\n1. #### Deploy the SPA and API\n   1. #### Click [here](command:workbench.action.terminal.new) to open your vscode terminal. (You may already have one open, that's ok)\n   1. #### Click [here](command:workbench.action.debug.start) to build and deploy the SPA and API.\n   1. #### Click [here](command:auth0.lab.openEndpointByName?[\"Lab: API, Lab: SPA\"]) to launch and view the SPA and API in your web browser.\n\n1. #### Take note of the URLs for your SPA and API."
+    },
+    {
+      "file": "src/spa-app/app.js",
+      "line": 1,
+      "title": "Update the Application Configuration in Auth0",
+      "description": "## Examine the URL Settings for the SPA in Your Labs Tenant\nNow that the application is deployed, we need to update the application settings in Auth0 to reflect the deployment URLs.\n\n1. #### Go to the [Applications page](https://manage.auth0.com/#/applications), and click the **Lab: SPA** in the application list view.\n\n1. #### On the Settings tab, scroll down to the Application URIs section.\nNote that The **Allowed Callback URLs** and **Allowed Logout URLs** fields are already populated. \n\n     This is beacuse we've configured them automatically using the Auth0 extension for vscode. If this were not the case, you would need to paste the URL of your SPA application into these fields manually.\n\nAt this point, both the SPA and API are running. However, if you navigate to the Expenses page on your app without logging in, you'll see that some data is available there publically. \n\nThat's because that data isn't coming from the API, it's hard-coded into the SPA App. Let's fix that."
+    },
+    {
+      "file": "src/spa-app/app.js",
+      "description": "## Calling an API\n\nTo make your SPA consume the private endpoint (API) on the user's behalf, it must fetch an access token first, then call the protected API. The first time your application asks for an access token for an API, the authorization server will request explicit consent from your users.\n\nTo request this consent, your application needs to be updated to include the request during the authentication process. Once the user has authenticated they will be prompted to grant consent. On that page, your users will learn what type of access your application is requesting, and they will be able to grant access or deny it.\n\nWe'll do this by making changes here in the spa-app > app.js file.",
+      "line": 1
+    },
+    {
+      "file": "src/spa-app/app.js",
+      "description": "## Requesting Consent\nHere, we'll update the spa-app's code to include the audience and scope that users will need to grant consent to.\n\n``` jsx\nwindow.auth0Client = await createAuth0Client({\n  domain,\n  client_id,\n  redirect_uri,\n  cacheLocation: \"localstorage\",\n  audience: \"https://expenses-api\", // 👈 Added\n  scope: \"read:reports\", // 👈 Added\n});\n```\n\nThese additional properties tell the SPA SDK the audience and scope needed in the access token your application will request. The SDK will try to fetch access tokens capable of consuming the `https://expenses-api` API with the `read:reports` scope.",
+      "line": 13,
+      "selection": {
+        "start": {
+          "line": 8,
+          "character": 1
+        },
+        "end": {
+          "line": 13,
+          "character": 6
+        }
+      }
+    },
+    {
+      "file": "src/spa-app/services/expensesApi.js",
+      "description": "## The expensesApi.js File\nAbove, you can see all the code used to request data from the Expenses API. There are two functions defined: `getTotals` and `getReports`. The getTotals function calls the Expenses API, but the `getReports` function is hardcoded with data.\n\nLet's change this, so that the data is requested from the API instead.",
+      "line": 39
+    },
+    {
+      "file": "src/spa-app/services/expensesApi.js",
+      "description": "## Replace Hard-Coded Data with the API Call\n\nThis code specifies the call for data to the Expenses API.\n\nThe new lines are nested inside a `try/catch` block and are executed when the expenses view is requested.\n\nFirst, the application calls the `getTokenSilently()` method (provided by the SPA SDK) to fetch a token without involving your user.\n\nAfter fetching an access token, the application will issue a request to the private API on the user's behalf.\n\nNote the authorization header passed to the `fetch()` function; this header includes the access token required to consume the expenses API.\n\n``` jsx\nconst token = await window.auth0Client.getTokenSilently();\nconst options = {\n    method: \"GET\",\n    headers: {\n    \"Content-Type\": \"application/json\",\n    Authorization: `Bearer ${token}`,\n    },\n};\nconst res = await fetch(`${window.env.API_URL}/reports`, options);\nconst json = await res.json();\nreturn json;\n```",
+      "line": 33,
+      "selection": {
+        "start": {
+          "line": 21,
+          "character": 1
+        },
+        "end": {
+          "line": 32,
+          "character": 9
+        }
+      }
+    },
+    {
+      "file": "src/spa-app/services/expensesApi.js",
+      "line": 1,
+      "title": "Give it a try!",
+      "description": "## Give it a try!\nYou are now ready to test the new version of the application. \n\nBut first, a little housekeeping is in order. \n1. #### Save changes and re-deploy:\n     1. #### Click [here](command:workbench.action.files.saveAll) to save all of the progress you've made.\n     1. #### Click [here](command:workbench.action.debug.stop) to stop the previous version of the SPA, and [here](command:workbench.action.debug.stop) to stop the previous version of the API.\n     1. #### Now, click [here](command:workbench.action.debug.start) to re-deploy the new versions.\n     1. #### Click [here](command:auth0.lab.openEndpointByName?[\"Lab: SPA, Lab: API\"]) to launch the SPA and API in your browser.\n\n1. #### Log in and try it out!\n     1. #### Click the Login link to start the authentication process. \n     1. #### Authenticate with the login you created for use with the lab materials.\n\n     The homepage should now addresses you by name and your profile image will be shown near the upper-right corner. It'll look something like this:\n\n     ![image11](https://cdn.auth0.com/website/training/example/IDFUN-M04-L01-Ex03/img-11.png)\n  \n     1. #### Click the Expenses link. \n     \n     The SPA will call the Expenses API and show the data retrieved. It should look something like this:\n\n     ![image15](https://cdn.auth0.com/website/training/example/IDFUN-M04-L01-Ex03/img-15.png)\n\nNice work! You have successfully updated the SPA application to call a secure API endpoint!"
+    }
+  ],
+  "ref": "main"
+}
