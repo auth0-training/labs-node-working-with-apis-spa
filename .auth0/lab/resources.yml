@@ -1,16 +1,23 @@
-
 clients: # Add other client settings https://auth0.com/docs/api/management/v2#!/Clients/post_clients
   -
-    name: "Lab: SPA"
-    app_type: "spa"
-    callbacks:
-      - "http://localhost:8000" # running locally
-      - "https://##CLOUDENV_ENVIRONMENT_ID##-8000.apps.codespaces.githubusercontent.com" # running in codespaces
-      - "https://8000-0-##INSTANCE_ID##.auth0-labs.appsembler.com" # running in appsembler
+    name: 'Lab: SPA'
+    app_type: spa
     allowed_logout_urls:
-      - "http://localhost:8000"
-      - "https://##CLOUDENV_ENVIRONMENT_ID##-8000.apps.codespaces.githubusercontent.com"
-      - "https://8000-0-##INSTANCE_ID##.auth0-labs.appsembler.com"
+      - http://localhost:8000
+    callbacks:
+      - http://localhost:8000
+    web_origins:
+      - http://localhost:8000
+    token_endpoint_auth_method: none
+    oidc_conformant: true
+    grant_types:
+      - authorization_code
+      - implicit
+      - refresh_token
+    is_first_party: true
+    jwt_configuration:
+      alg: RS256
+
 resourceServers: # Add other resource server settings (https://auth0.com/docs/api/management/v2#!/Resource_Servers/post_resource_servers)
   -
     name: "Lab: API"
@@ -18,3 +25,4 @@ resourceServers: # Add other resource server settings (https://auth0.com/docs/ap
     scopes:
       - value: "read:reports"
         description: "read reports"
+
