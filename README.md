@@ -1,7 +1,7 @@
 [![Auth0 Training](https://user-images.githubusercontent.com/73120/125103885-a2bb5d80-e091-11eb-8084-383003f1e484.png "Auth0 Training")](https://training.auth0.com)
 # Lab Node Working with APIs from a SPA
 
-This hands-on lab learners will put their API knowledge into practice. They'll create an API in their Tenant, deploy a test API into the lab environment, obtain a test Access Token, and call the test API using the Access Token. 
+This hands-on lab learners will put their API knowledge into practice. They'll create an API in their Tenant, deploy a test API into the lab environment, obtain a test Access Token, and call the test API using the Access Token.
 
 > Note: This lab template is an experimental release, and is built on a best-efforts basis by some Auth0 developers in their available innovation time. It is open-source licensed and free to use, and is not covered by any Auth0 Terms of Service or Agreements. If you have issues with this template you can engage with the project's developer community through the repository GitHub Issues list, or contribute fixes and enhancements of your own via a Pull Request.
 ### Requirements
@@ -10,7 +10,7 @@ You'll need an Auth0 account. If you do not already have one, you can create a f
 
 This lab assumes the user is using [Visual Studio Code](https://code.visualstudio.com/download) and [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
-The [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension needs to be installed in VSCode.
+The [Remote - Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) extension needs to be installed in VSCode.
 
 ### Getting Started
 
