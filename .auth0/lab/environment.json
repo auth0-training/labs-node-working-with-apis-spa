@@ -1,6 +1,6 @@
 {
   "name": "Lab Node Working with APIs from a SPA",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "resources": "resources.yml",
   "unauthenticatedTour": ".auth0/lab/guides/signin.tour",
   "postConfigureTour": ".auth0/lab/guides/create-the-expenses-api-in-your-auth0-tenant.tour",
