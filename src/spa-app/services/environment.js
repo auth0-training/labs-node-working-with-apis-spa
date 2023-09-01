@@ -12,12 +12,18 @@
   const VERCEL_GITHUB_ORG = process.env.VERCEL_GITHUB_ORG;
   const VERCEL_GITHUB_REPO = process.env.VERCEL_GITHUB_REPO;
   const VERCEL_GIT_COMMIT_REF = process.env.VERCEL_GIT_COMMIT_REF;
+  const PORT = 38500;
 
   // update value based on vercel hosting
   if (VERCEL_URL) {
     APP_URL = `https://${VERCEL_GITHUB_REPO}-git-${VERCEL_GIT_COMMIT_REF}-${VERCEL_GITHUB_ORG.toLowerCase()}.vercel.app`;
     // ensure expected hosted url
     if (!APP_URL.includes(window.location.host)) window.location = APP_URL;
+  }
+
+  // Use the Codespace App URL if we're in the Codespace environment
+  if (process.env.CODESPACE_NAME) {
+    APP_URL = `https://${process.env.CODESPACE_NAME}-${PORT}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`;
   }
 
   // make environment specific values available to app
