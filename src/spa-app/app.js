@@ -8,15 +8,27 @@ import router from "./router";
   window.auth0Client = await createAuth0Client({
     domain,
     client_id,
-    redirect_uri,
+       authorizationParams:{
+      redirect_uri,
+    },
     cacheLocation: "localstorage",
   });
 
   // handle user navigation
-  window.addEventListener("hashchange", router);
-  window.addEventListener("load", router);
+  window.addEventListener("hashchange", () => {
+  router();
+});
+  window.addEventListener("load", () => {
+  // avoid calling router twice when handling redirect callback upon sign in
+    if (!sessionStorage.getItem("reload")) {
+      router();
+      sessionStorage.setItem("reload", "true");
+    }
+});
 
-  //handle user reload of browser
-  if (sessionStorage.getItem("reload")) await router();
+//handle user reload of browser
+if (sessionStorage.getItem("reload")) {
   sessionStorage.setItem("reload", "true");
+  await router();
+}
 })();
