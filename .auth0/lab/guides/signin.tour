@@ -1,6 +1,7 @@
 {
   "$schema": "https://aka.ms/codetour-schema",
   "title": "0: signin",
+  "nextTour": "1: Create the Expenses API in your Auth0 Tenant",
   "steps": [
     {
       "file": "",
