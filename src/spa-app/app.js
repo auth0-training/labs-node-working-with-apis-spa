@@ -5,7 +5,7 @@ import router from "./router";
   const client_id = window.env.CLIENT_ID;
   const redirect_uri = window.env.APP_URL;
 
-  window.auth0Client = await createAuth0Client({
+  window.auth0Client = await auth0.createAuth0Client({
     domain,
     client_id,
        authorizationParams:{
