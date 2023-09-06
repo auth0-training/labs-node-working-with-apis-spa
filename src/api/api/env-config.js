@@ -45,6 +45,7 @@ console.log(`AUDIENCE: ${AUDIENCE}`);
 console.log("----------------------------------\n");
 
 module.exports = {
+  checkUrl,
   APP_URL: checkEnvironment(),
   APP_URL: appUrl,
   ISSUER_BASE_URL: removeTrailingSlashFromUrl(ISSUER_BASE_URL),
