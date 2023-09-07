@@ -3,13 +3,13 @@
   "title": "1: Create the Expenses API in your Auth0 Tenant",
   "steps": [
     {
-      "file": "src/spa-app/app.js",
+      "file": "",
       "line": 1,
       "title": "Create the Expenses API in Your Labs Tenant",
       "description": "## Create the Expenses API in Your Labs Tenant\n\n1. #### Log into your Auth0 dashboard (You may already be logged in.) \n\n1. #### Make sure you're working in your '_labs_' tenant. \n     ![Select labs tenant](https://cdn.auth0.com/website/a0fun/v2/working-with-apis-0.gif)\n\n1. #### Select the \"_Applications_\" drop-down menu in the left-side navigation, and select \"_APIs_\"\n    ![Open applications menu](https://cdn.auth0.com/website/a0fun/v2/working-with-apis-1.gif)\n\n1. #### If you see an API titled _Lab: API_ here already, go ahead and delete it before proceeding. Otherwise, skip to step 5.\n    1. #### Click into the settings for the _Lab: API_.\n    1. #### Scroll to the bottom of the settings page and click the Delete button.\n    1. #### Follow the instructions to delete the _Lab: API_.\n\n1. #### Click the \"_+ Create API_\" Button.\n\n1. #### Name the API \"_Lab: API_\". (Please ensure this matches exactly)\n\n1. #### For the _Identifier_ field, copy and paste _`\"https://expenses-api\"`_\n\n1. #### Click _Create_.  \n\n    Here's how this should look:\n    \n    ![Create API](https://cdn.auth0.com/website/a0fun/v2/create-labapi.gif)  \n\n1. #### Click the _Permissions_ tab. \n\n1. #### Add a new permission called \"_read:reports_\" with a suitable description.\n    This custom permission is the one you will use to determine whether the client is authorized to retrieve expenses.  \n\n    Here's how that should look:\n\n    ![Add Permission](https://cdn.auth0.com/website/a0fun/v2/add-perms.gif)\n\nExcellent. Your API is registered with Auth0."
     },
     {
-      "file": "src/spa-app/app.js",
+      "file": "",
       "line": 1,
       "title": "Confirm that Your Auth0 Tenant is Configured Appropriately",
       "description": "## Confirm that Your Auth0 Tenant is Configured Appropriately\nNow, you'll use a command to the Auth0 extension for vscode that will reach out to your labs tenant through the CLI and ensure that it is configured appropriately for this lab.\n\n1. #### Click [here](command:auth0.lab.tenantConfigure) to ensure that your Auth0 tenant is configured appropriately for this lab.\n1. #### Click [here](command:workbench.view.extension.auth0-explorer) to open the Auth0 extension and view your tenant configuration. \n    To view details, under APPLICATIONS, you can expand the Lab: SPA. Under APIS, you can expand the Lab: API. \n1. #### Last, click [here](command:workbench.action.files.saveAll) to save all of this progress.\n\nYou're all set to move forward! "
