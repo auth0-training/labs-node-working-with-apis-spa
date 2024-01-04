@@ -27,7 +27,7 @@
     },
     {
       "file": "src/spa-app/app.js",
-      "description": "## Requesting Consent\nHere, we'll update the spa-app's code to include the audience and scope that users will need to grant consent to.\n\n``` jsx\nwindow.auth0Client = await auth0.createAuth0Client({\n  domain,\n  clientId,\n    authorizationParams: {\n    redirect_uri,\n    audience: \"https://expenses-api\", // 👈 Added\n    scope: "read:reports openid email profile", // 👈 Added\n},\n    cacheLocation: \"localstorage\",\n});\n```\n\nThese additional properties tell the SPA SDK the audience and scope needed in the access token your application will request. The SDK will try to fetch access tokens capable of consuming the `https://expenses-api` API with the `read:reports` scope.",
+      "description": "## Requesting Consent\nHere, we'll update the spa-app's code to include the audience and scope that users will need to grant consent to.\n\n``` jsx\nwindow.auth0Client = await auth0.createAuth0Client({\n  domain,\n  clientId,\n    authorizationParams: {\n    redirect_uri,\n    audience: \"https://expenses-api\", // 👈 Added\n    scope: \"read:reports openid email profile\", // 👈 Added\n},\n    cacheLocation: \"localstorage\",\n});\n```\n\nThese additional properties tell the SPA SDK the audience and scope needed in the access token your application will request. The SDK will try to fetch access tokens capable of consuming the `https://expenses-api` API with the `read:reports` scope.",
       "line": 15,
       "selection": {
         "start": {
