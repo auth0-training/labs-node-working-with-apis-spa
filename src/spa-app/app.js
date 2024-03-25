@@ -5,14 +5,16 @@ import router from "./router";
   const clientId = window.env.CLIENT_ID;
   const redirect_uri = window.env.APP_URL;
 
-  window.auth0Client = await auth0.createAuth0Client({
-    domain,
-    clientId,
-       authorizationParams:{
-      redirect_uri,
-    },
+window.auth0Client = await auth0.createAuth0Client({
+  domain,
+  clientId,
+    authorizationParams: {
+    redirect_uri,
+    audience: "https://expenses-api", // 👈 Added
+    scope: "openid email profile", // 👈 Added
+},
     cacheLocation: "localstorage",
-  });
+});
 
   // handle user navigation
   window.addEventListener("hashchange", () => {

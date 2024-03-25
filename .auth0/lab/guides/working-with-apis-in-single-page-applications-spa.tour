@@ -28,7 +28,7 @@
     {
       "file": "src/spa-app/app.js",
       "description": "## Requesting Consent\nHere, we'll update the spa-app's code to include the audience and scope that users will need to grant consent to.\n\n``` jsx\nwindow.auth0Client = await auth0.createAuth0Client({\n  domain,\n  clientId,\n    authorizationParams: {\n    redirect_uri,\n    audience: \"https://expenses-api\", // 👈 Added\n    scope: \"read:reports openid email profile\", // 👈 Added\n},\n    cacheLocation: \"localstorage\",\n});\n```\n\nThese additional properties tell the SPA SDK the audience and scope needed in the access token your application will request. The SDK will try to fetch access tokens capable of consuming the `https://expenses-api` API with the `read:reports` scope.",
-      "line": 15,
+      "line": 24,
       "selection": {
         "start": {
           "line": 8,
@@ -48,7 +48,7 @@
     {
       "file": "src/spa-app/services/expensesApi.js",
       "description": "## Replace Hard-Coded Data with the API Call\n\nThis code specifies the call for data to the Expenses API.\n\nThe new lines are nested inside a `try/catch` block and are executed when the expenses view is requested.\n\nFirst, the application calls the `getTokenSilently()` method (provided by the SPA SDK) to fetch a token without involving your user.\n\nAfter fetching an access token, the application will issue a request to the private API on the user's behalf.\n\nNote the authorization header passed to the `fetch()` function; this header includes the access token required to consume the expenses API.\n\n``` jsx\nconst token = await window.auth0Client.getTokenSilently();\nconst options = {\n    method: \"GET\",\n    headers: {\n    \"Content-Type\": \"application/json\",\n    Authorization: `Bearer ${token}`,\n    },\n};\nconst res = await fetch(`${window.env.API_URL}/reports`, options);\nconst json = await res.json();\nreturn json;\n```",
-      "line": 33,
+      "line": 43,
       "selection": {
         "start": {
           "line": 21,
